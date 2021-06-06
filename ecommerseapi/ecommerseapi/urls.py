@@ -16,10 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from rest_framework.authtoken.views import obtain_auth_token
+from api.views import RegistrationAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('api.urls')),
     #If we do POST request with username and password in the below url we will get the auth token 
-    path('api/auth/auth-token',obtain_auth_token,name='obtain-auth-token'),
+    # path('api/auth/auth-token',obtain_auth_token,name='obtain-auth-token'),
+    #After registration of a new user we call login url to get token and then do all the requests with that token
+    path('auth/register',RegistrationAPIView.as_view(),name='register'),
+    path('auth/login',obtain_auth_token,name='obtain-auth-token'),
+    
 ]
