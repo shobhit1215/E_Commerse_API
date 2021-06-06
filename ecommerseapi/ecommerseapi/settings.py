@@ -38,12 +38,37 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    # 'corsheaders',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ],
+}
+
+# CORS_ALLOWED_ORIGIN = [
+# "http://www.website.com",
+# "http://localhost:3000",
+# "http://localhost:4200",
+# "https://web.postman.co",
+
+# ]   
+
+# CORS_ALLOW_METHODS = [
+#     "GET",
+#     "PUT",
+#     "DELETE",
+#     "POST",
+# ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # 'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',

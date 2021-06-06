@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here
 class Category(models.Model):
@@ -42,3 +43,15 @@ class Product(models.Model):
 
     def __str__(self):
         return '{} {}'.format(self.product_tag, self.name)
+
+class Cart(models.Model):
+    cart_id = models.OneToOneField(User,on_delete=models.CASCADE,primary_key=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    books = models.ForeignKey(Book,on_delete=models.CASCADE,default=1)
+    products = models.ForeignKey(Product,on_delete=models.CASCADE,default=1)
+
+    class Meta:
+        ordering = ['cart_id','-created_at']
+
+    def __str__(self):
+        return f'{self.cart_id}'
